@@ -22,3 +22,7 @@ spec:
     {{- end }}
     gateway: {{ required ".Values.proxmox.ipv4Config.gateway is required" .Values.proxmox.ipv4Config.gateway }}
     prefix: {{ required ".Values.proxmox.ipv4Config.prefix is required" .Values.proxmox.ipv4Config.prefix }}
+{{- with ( required ".Values.proxmox.credentialsRef is required" .Values.proxmox.credentialsRef) }}
+  credentialsRef:
+  {{- toYaml . | nindent 4 -}}
+{{- end }}

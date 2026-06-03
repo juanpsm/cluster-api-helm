@@ -1,5 +1,5 @@
 ---
-apiVersion: cluster.x-k8s.io/{{ .Values.clusterapiVersion }}
+apiVersion: cluster.x-k8s.io/{{ .Values.clusterApiVersion }}
 kind: Cluster
 metadata:
   labels:
@@ -18,6 +18,6 @@ spec:
     kind: {{ include "capi-proxmox.kubeadmControlPlaneKind" . }}
     name: {{ include "capi-proxmox.kubeadmControlPlaneName" . }}
   infrastructureRef:
-    apiVersion: infrastructure.cluster.x-k8s.io/{{ .Values.clusterapiVersion }}
+    apiVersion: infrastructure.cluster.x-k8s.io/{{ .Values.clusterApiVersion }}
     kind: ProxmoxCluster
     name: {{ include "capi-proxmox.name" . }}

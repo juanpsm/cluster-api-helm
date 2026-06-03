@@ -1,7 +1,7 @@
 ---
 # CAPMOX version for every created manifest
-capmoxApiVersion: v1alpha1
-clusterapiVersion: v1beta1
+capmoxApiVersion: v1alpha2
+clusterApiVersion: v1beta2
 clusterLabels: {}
 users: []
 #  users:
@@ -34,6 +34,13 @@ proxmox:
     # - 192.168.41.101-192.168.41.120
     gateway: null
     prefix: null
+
+    # credentialRef
+    #   name	<string>
+    #     name is unique within a namespace to reference a secret resource.
+    #   namespace	<string>
+    #     namespace defines the space within which the secret name must be unique.
+    credentialRef: {}
 
 # Templates to use for master nodes
 #   kubectl explain ProxmoxMachineTemplate.spec.template.spec

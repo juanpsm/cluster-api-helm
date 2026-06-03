@@ -3,7 +3,7 @@
 {{- $object := dict "KubeadmConfigTemplate" $template
           "Index" $index "Context" $ -}}
 ---
-apiVersion: bootstrap.cluster.x-k8s.io/{{ $.Values.clusterapiVersion }}
+apiVersion: bootstrap.cluster.x-k8s.io/{{ $.Values.clusterApiVersion }}
 kind: KubeadmConfigTemplate
 metadata:
   name: {{ include "capi-proxmox.kubeadmConfigTemplateName" $object }}

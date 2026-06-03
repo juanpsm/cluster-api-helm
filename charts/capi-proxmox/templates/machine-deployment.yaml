@@ -9,7 +9,7 @@
           $index) $md.kubeadmConfigTemplateName)
       "Context" $ -}}
 ---
-apiVersion: cluster.x-k8s.io/{{ $.Values.clusterapiVersion }}
+apiVersion: cluster.x-k8s.io/{{ $.Values.clusterApiVersion }}
 kind: MachineDeployment
 metadata:
   name: {{ include "capi-proxmox.machineDeploymentName" $object }}
@@ -22,13 +22,13 @@ spec:
     spec:
       bootstrap:
         configRef:
-          apiVersion: bootstrap.cluster.x-k8s.io/{{ $.Values.clusterapiVersion }}
+          apiVersion: bootstrap.cluster.x-k8s.io/{{ $.Values.clusterApiVersion }}
           kind: KubeadmConfigTemplate
           name: {{ include "capi-proxmox.findKubeadmConfigTemplate"
             $dictKubeadmConfigTemplate }}
       clusterName: {{ include "capi-proxmox.name" $ }}
       infrastructureRef:
-        apiVersion: infrastructure.cluster.x-k8s.io/{{ $.Values.clusterapiVersion }}
+        apiVersion: infrastructure.cluster.x-k8s.io/{{ $.Values.clusterApiVersion }}
         kind: ProxmoxMachineTemplate
         name: {{ include "capi-proxmox.findTemplate" $dictTemplate }}
       version: {{ default $object.version $.Values.kubeadmControlPlane.version }}

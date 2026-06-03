@@ -116,6 +116,6 @@ range iteration
 {{- if .Values.kamaji.enabled }}
 {{- printf "%s/%s" "controlplane.cluster.x-k8s.io" .Values.kamaji.apiVersion }}
 {{- else -}}
-{{- printf "%s/%s" "controlplane.cluster.x-k8s.io" .Values.clusterapiVersion }}
+{{- printf "%s/%s" "controlplane.cluster.x-k8s.io" .Values.clusterApiVersion }}
 {{- end -}}
 {{- end -}}

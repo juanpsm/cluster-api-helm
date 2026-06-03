@@ -19,6 +19,9 @@ proxmox:
       - 1.2.3.4-1.2.5.6
     gateway: 11111
     prefix: 24
+  credentialsRef:
+    name: creds
+    namespace: ns
 kubeadmControlPlane:
   templateName: control-plane
   version: 1.32.5
