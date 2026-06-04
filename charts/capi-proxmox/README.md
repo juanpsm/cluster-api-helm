@@ -87,9 +87,9 @@ machineTemplates:
     numSockets: 2
     templateID: 101
     network:
-       default:
-         bridge: vmbr0
-         model: virtio
+      networkDevices:
+        - bridge: vmbr0
+          model: virtio
   - name: worker
     diskSizeGb: 60
     format: raw
@@ -98,9 +98,9 @@ machineTemplates:
     numSockets: 2
     templateID: 101
     network:
-       default:
-         bridge: vmbr0
-         model: virtio
+      networkDevices:
+        - bridge: vmbr0
+          model: virtio
 
 machineDeployments:
    - name: md name
@@ -112,9 +112,25 @@ kubeadmConfigTemplates:
     joinConfiguration:
       nodeRegistration:
         kubeletExtraArgs:
-          provider-id: "proxmox://'{{ ds.meta_data.instance_id }}'"
+          - name: provider-id
+            value: "proxmox://'{{ ds.meta_data.instance_id }}'"
 ```
 
+
+## Version compatibility
+
+| Chart version | Cluster API | CAPMOX | CAPMOX API | CAPI API |
+|---------------|-------------|--------|------------|----------|
+| 1.3.x         | 1.11        | 0.8    | v1alpha2   | v1beta2  |
+| 1.2.x         | 1.9         | 0.7    | v1alpha1   | v1beta1  |
+
+Chart 1.3 introduces breaking changes from 1.2:
+
+- `network.default` in `machineTemplates` replaced by `network.networkDevices` (list) — CAPMOX 0.8 API change
+- `kubeletExtraArgs` changed from map to list of `{name, value}` objects — kubeadm v1beta4
+- `machineTemplate.infrastructureRef` moved under `machineTemplate.spec.infrastructureRef` in `KubeadmControlPlane`
+- `rolloutBefore` removed from `KubeadmControlPlane`
+- Object cross-references now use `apiGroup` instead of `apiVersion`
 
 ## Values
 

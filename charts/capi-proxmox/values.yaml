@@ -202,11 +202,13 @@ kubeadmControlPlane:
   initConfiguration:
     nodeRegistration:
       kubeletExtraArgs:
-        provider-id: "proxmox://'{{ ds.meta_data.instance_id }}'"
+        - name: provider-id
+          value: "proxmox://'{{ ds.meta_data.instance_id }}'"
   joinConfiguration:
     nodeRegistration:
       kubeletExtraArgs:
-        provider-id: "proxmox://'{{ ds.meta_data.instance_id }}'"
+        - name: provider-id
+          value: "proxmox://'{{ ds.meta_data.instance_id }}'"
   preKubeadmCommands:
     - /etc/kube-vip-prepare.sh
 
@@ -215,7 +217,8 @@ kubeadmConfigTemplateDefaults:
   joinConfiguration:
     nodeRegistration:
       kubeletExtraArgs:
-        provider-id: "proxmox://'{{ ds.meta_data.instance_id }}'"
+        - name: provider-id
+          value: "proxmox://'{{ ds.meta_data.instance_id }}'"
 
 # KubeadmConfigTemplates to create machines. 
 #   kubectl explain KubeadmConfigTemplate.spec.kubeadmConfigSpec

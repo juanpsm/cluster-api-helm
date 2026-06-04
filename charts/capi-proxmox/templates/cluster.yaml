@@ -14,10 +14,10 @@ spec:
   {{- toYaml . | nindent 4 }}
 {{- end }}
   controlPlaneRef:
-    apiVersion: {{ include "capi-proxmox.kubeadmControlPlaneApiVersion" . }}
+    apiGroup: {{ include "capi-proxmox.kubeadmControlPlaneApiGroup" . }}
     kind: {{ include "capi-proxmox.kubeadmControlPlaneKind" . }}
     name: {{ include "capi-proxmox.kubeadmControlPlaneName" . }}
   infrastructureRef:
-    apiVersion: infrastructure.cluster.x-k8s.io/{{ .Values.clusterApiVersion }}
+    apiGroup: infrastructure.cluster.x-k8s.io
     kind: ProxmoxCluster
     name: {{ include "capi-proxmox.name" . }}

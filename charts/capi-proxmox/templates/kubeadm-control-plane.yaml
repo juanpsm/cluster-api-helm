@@ -39,15 +39,12 @@ spec:
     users:
       {{- toYaml .users | nindent 6 }}
   {{- end }}
-  {{- with .Values.kubeadmControlPlane.rolloutBefore }}
-  rolloutBefore:
-    {{- toYaml . | nindent 4 }}
-  {{- end }}
   machineTemplate:
-    infrastructureRef:
-      apiVersion: infrastructure.cluster.x-k8s.io/{{ .Values.clusterApiVersion }}
-      kind: ProxmoxMachineTemplate
-      name: {{ include "capi-proxmox.findTemplate" $dictTemplate }}
+    spec:
+      infrastructureRef:
+        apiGroup: infrastructure.cluster.x-k8s.io
+        kind: ProxmoxMachineTemplate
+        name: {{ include "capi-proxmox.findTemplate" $dictTemplate }}
   replicas: {{ default 1 .Values.kubeadmControlPlane.replicas }}
   version: {{ required ".Values.kubeadmControlPlane.version is required" .Values.kubeadmControlPlane.version }}
 {{- end }}

@@ -35,9 +35,6 @@ kubeadmControlPlane:
   joinConfiguration:
     nodeRegistration:
       taints: []
-  rolloutBefore:
-    certificatesExpiryDays: 21
-
 machineTemplates:
   - name: control-plane
     diskSizeGb: 60
@@ -52,10 +49,10 @@ machineTemplates:
         - v1.32.5
         - ubuntu-24.04
     network:
-       default:
-         bridge: vmbr0
-         model: virtio
-         vlan: 400
+      networkDevices:
+        - bridge: vmbr0
+          model: virtio
+          vlan: 400
   - name: worker
     diskSizeGb: 60
     format: raw
@@ -64,10 +61,10 @@ machineTemplates:
     numSockets: 2
     templateID: 101
     network:
-       default:
-         bridge: vmbr0
-         model: virtio
-         vlan: 400
+      networkDevices:
+        - bridge: vmbr0
+          model: virtio
+          vlan: 400
 
 machineDeployments:
    - name: md name

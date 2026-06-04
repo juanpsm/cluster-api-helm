@@ -8,7 +8,6 @@ Expand the name of the chart.
 {{- printf "%s" $name | trunc 63 | trimSuffix "-" -}}
 {{- end -}}
 
-
 {{- define "capi-proxmox.controlPlaneUsers" -}}
 {{- $users:= default .Values.users .Values.kubeadmControlPlane.users -}}
 {{- if and (kindIs "slice" $users) (eq (len $users) 0) }}
@@ -112,10 +111,14 @@ range iteration
 {{- end -}}
 {{- end -}}
 
+{{- define "capi-proxmox.kubeadmControlPlaneApiGroup" -}}
+controlplane.cluster.x-k8s.io
+{{- end -}}
+
 {{- define "capi-proxmox.kubeadmControlPlaneApiVersion" -}}
 {{- if .Values.kamaji.enabled }}
-{{- printf "%s/%s" "controlplane.cluster.x-k8s.io" .Values.kamaji.apiVersion }}
+{{- printf "%s/%s" ( include "capi-proxmox.kubeadmControlPlaneApiGroup" . ) .Values.kamaji.apiVersion }}
 {{- else -}}
-{{- printf "%s/%s" "controlplane.cluster.x-k8s.io" .Values.clusterApiVersion }}
+{{- printf "%s/%s" ( include "capi-proxmox.kubeadmControlPlaneApiGroup" . ) .Values.clusterApiVersion }}
 {{- end -}}
 {{- end -}}
