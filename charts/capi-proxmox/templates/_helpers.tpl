@@ -100,7 +100,7 @@ range iteration
 {{- end -}}
 
 {{- define "capi-proxmox.kubeadmConfigTemplate" -}}
-{{- merge .Context.Values.kubeadmConfigTemplateDefaults .KubeadmConfigTemplate | toYaml }}
+{{- merge .KubeadmConfigTemplate .Context.Values.kubeadmConfigTemplateDefaults | toYaml }}
 {{- end -}}
 
 {{- define "capi-proxmox.kubeadmControlPlaneKind" -}}
